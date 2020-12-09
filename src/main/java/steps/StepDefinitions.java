@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
@@ -13,6 +14,7 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import dataprovider.ConfigFileReader;
 import factory.CartPage;
 import factory.LocationSearchPage;
 import factory.LoginPage;
@@ -25,14 +27,24 @@ public class StepDefinitions
 	CartPage cartPage;		//declaring the CartPage instance
 	LocationSearchPage lsp;	//declaring the LocationSearchPage instance
 	Actions act;			//declaring the Actions instance
+	ConfigFileReader c;
 	
 	@Before
 	//Code the execute before every test
 	public void intitialize()
 	{
-		System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
-		driver= new ChromeDriver();
-		driver.get("https://www.mcdelivery.co.in/");
+		c=new ConfigFileReader();
+		
+	//	System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", c.getDriverPath());
+		
+		ChromeOptions options=new ChromeOptions();
+		options.addArguments("window-size=1400,800");
+		options.addArguments("headless");
+		
+		driver= new ChromeDriver(options);
+	//	driver.get("https://www.mcdelivery.co.in/");
+		driver.get(c.getUrl1());
 		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		act=new Actions(driver);
@@ -65,6 +77,7 @@ public class StepDefinitions
 	@When("I click on Login")
 	public void i_click_on_Login() {
 		loginPage.clickLoginButton();
+		System.out.println("Test one done");
 	  
 	}
 
@@ -89,10 +102,13 @@ public class StepDefinitions
 	public void i_will_be_navigated_to_location_page() {
 		loginPage.clickLoginSignup();
 		loginPage.clickLoginViaPassword();
-		loginPage.enterMobileNo("8179225291");
-		loginPage.enterPassword("msrihari123");
+	//	loginPage.enterMobileNo("8179225291");
+	//	loginPage.enterPassword("msrihari123");
+		loginPage.enterMobileNo(c.getUser());
+		loginPage.enterPassword(c.getPass());
 		loginPage.clickLoginButton();
-		driver.navigate().to("https://www.mcdelivery.co.in/serviciability/locateme/home");
+	//	driver.navigate().to("https://www.mcdelivery.co.in/serviciability/locateme/home");
+		driver.navigate().to(c.getUrl2());
 	}
 
 	@When("I enter a location with service as servinglocation {string}")
@@ -143,8 +159,10 @@ public class StepDefinitions
 	public void i_have_selected_the_delivery_location() {
 		loginPage.clickLoginSignup();
 		loginPage.clickLoginViaPassword();
-		loginPage.enterMobileNo("8179225291");
-		loginPage.enterPassword("msrihari123");
+	//	loginPage.enterMobileNo("8179225291");
+	//	loginPage.enterPassword("msrihari123");
+		loginPage.enterMobileNo(c.getUser());
+		loginPage.enterPassword(c.getPass());
 		loginPage.clickLoginButton();
 	}
 
@@ -175,11 +193,13 @@ public class StepDefinitions
 	public void i_have_clicked_on_Add_button_of_a_product() throws InterruptedException {
 		loginPage.clickLoginSignup();
 		loginPage.clickLoginViaPassword();
-		loginPage.enterMobileNo("8179225291");
-		loginPage.enterPassword("msrihari123");
+//		loginPage.enterMobileNo("8179225291");
+//		loginPage.enterPassword("msrihari123");
+		loginPage.enterMobileNo(c.getUser());
+		loginPage.enterPassword(c.getPass());
 		loginPage.clickLoginButton();
 		Thread.sleep(2000);
-		cartPage.enterSearchItem("burger");
+		cartPage.enterSearchItem(c.getBurger());
 		Thread.sleep(2000);
 		cartPage.clickAddButton();
 	}
@@ -202,11 +222,13 @@ public class StepDefinitions
 	public void i_have_added_a_customization() throws InterruptedException {
 		loginPage.clickLoginSignup();
 		loginPage.clickLoginViaPassword();
-		loginPage.enterMobileNo("8179225291");
-		loginPage.enterPassword("msrihari123");
+//		loginPage.enterMobileNo("8179225291");
+//		loginPage.enterPassword("msrihari123");
+		loginPage.enterMobileNo(c.getUser());
+		loginPage.enterPassword(c.getPass());
 		loginPage.clickLoginButton();
 		Thread.sleep(1000);
-		cartPage.enterSearchItem("chicken");
+		cartPage.enterSearchItem(c.getChicken());
 		Thread.sleep(2000);
 		cartPage.clickAddButton();
 		Thread.sleep(2000);

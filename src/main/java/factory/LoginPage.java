@@ -7,41 +7,52 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import dataprovider.ConfigFileReader;
+
 public class LoginPage 
 {
 	WebDriver driver;
-	//COnstructor of LoginPage class
+	ConfigFileReader c;
+	//Constructor of LoginPage class
 	public LoginPage(WebDriver driver)
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this); //Initializing the elements using PageFactory
+		c=new ConfigFileReader();
 	}
 	
 	//Declaring the WebElements of LoginPage	
+//	@FindBy(xpath="//*[@id='headerComp']/div/div[2]/div[2]/div[2]")
 	@FindBy(xpath="//*[@id='headerComp']/div/div[2]/div[2]/div[2]")
 	@CacheLookup
 	WebElement loginSignupButton;
 	
+//	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[1]/div/div[2]/div")
 	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[1]/div/div[2]/div")
 	@CacheLookup
 	WebElement loginViaPassword;
 	
+//	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[2]/form/div/div[1]/input")
 	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[2]/form/div/div[1]/input")
 	@CacheLookup
 	WebElement mobileNo;
 	
+//	@FindBy(xpath="//*[@id='password']")
 	@FindBy(xpath="//*[@id='password']")
 	@CacheLookup
 	WebElement password;
 	
+//	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[2]/form/div/div[4]/div[3]/button")
 	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[2]/form/div/div[4]/div[3]/button")
 	@CacheLookup
 	WebElement loginButton;
 	
+//	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[2]/form/div/div[2]/label")
 	@FindBy(xpath="/html/body/ngb-modal-window/div/div/app-login-modal/div/div[2]/form/div/div[2]/label")
 	@CacheLookup
 	WebElement invalidUserPassMessage;
 	
+//	@FindBy(xpath="//*[@id='headerComp']/div/div[2]/div[2]/div[3]")
 	@FindBy(xpath="//*[@id='headerComp']/div/div[2]/div[2]/div[3]")
 	@CacheLookup
 	WebElement myAccount;

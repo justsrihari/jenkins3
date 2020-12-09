@@ -18,6 +18,12 @@
 		<maven.compiler.version>3.3</maven.compiler.version>
 	</properties>
 
+
+
+
+
+
+
 	<dependencies>
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -31,6 +37,12 @@
 			<version>1.1.12</version>
 		</dependency>
 
+
+
+
+
+
+
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit</artifactId>
@@ -38,6 +50,19 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.3.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
